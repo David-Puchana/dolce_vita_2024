@@ -122,15 +122,13 @@ public class UsuarioDAO {
         return list;        
     }   
 
-    public boolean updateUser(Usuario user){
-       
-        String sql = "INSERT INTO Usuario (tipoDocumento,documento,nombres,apellidos,"+
-                     "direccion,telefono,email,whatsapp,rol,password)"+
-                     "VALUES (?,?,?,?,?,?,?,?,?,?)";
-        boolean respuesta = false;    
+    public boolean updateUser(Usuario user, String idDocument){
+        Connection conn = connDB.getConnectionDB();     
+        boolean respuesta = false;   
+        String sql = "UPDATE Usuario SET tipoDocumento=?, documento=?, nombres=?, apellidos=?,"+
+                     " direccion=?, telefono=?, email=?, whatsapp=?,rol=?,password=? WHERE documento=?";
+        
         try{
-            Connection conn = connDB.getConnectionDB();            
-
             pst = conn.prepareStatement(sql);
             pst.setString(1, user.getTipoDocumento());
             pst.setString(2, user.getDocumento());
@@ -138,51 +136,37 @@ public class UsuarioDAO {
             pst.setString(4, user.getApellidos());
             pst.setString(5, user.getDireccion());
             pst.setString(6, user.getTelefono());
-            pst.setString(7, user.getEmail());
+            pst.setString(7,user.getEmail());
             pst.setString(8, user.getWhatsapp());
             pst.setString(9, user.getRol());
             pst.setString(10, user.getPass());
+            pst.setString(11, idDocument);
             pst.executeUpdate();
             respuesta = true;
-
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);            
-            return false;
-        }           
-
-        return respuesta;
-    }   
-
-    public Usuario loadId(String id){ 
-        Connection conn = connDB.getConnectionDB(); 
-        String sql = "SELECT * FROM usuario WHERE documento=?";        
-        Usuario u = new Usuario();
-        try{            
-            pst = conn.prepareStatement(sql);
-            result = pst.executeQuery();
-            
-            while(result.next()){                
-                u.setIdUsuario(result.getInt(1));
-                u.setTipoDocumento(result.getString(2));
-                u.setDocumento(result.getString(3));
-                u.setNombres(result.getString(4));
-                u.setApellidos(result.getString(5));
-                u.setDireccion(result.getString(6));
-                u.setTelefono(result.getString(7));
-                u.setEmail(result.getString(8));
-                u.setWhatsapp(result.getString(9));
-                u.setRol(result.getString(10));
-                u.setPass(result.getString(11));                                                           
-            }
             
         }catch(Exception e){
+            respuesta = false;
             JOptionPane.showMessageDialog(null, e);            
         }
-        
-        return u;               
-        
-        
-        
-    }   
+        return respuesta;
 
+    }   
+    
+    
+    public boolean delete(String documento){
+        Connection conn = connDB.getConnectionDB();        
+        String sql =  "DELETE FROM Usuario WHERE documento=?";
+        boolean respuesta = false;   
+        try{            
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, documento);
+            pst.executeUpdate();
+            respuesta = true;
+        }catch(Exception e){
+            respuesta = false;
+            JOptionPane.showMessageDialog(null, e);            
+        }
+        return respuesta;
+    }   
+    
 }

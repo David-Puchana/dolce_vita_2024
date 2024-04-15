@@ -13,7 +13,7 @@
             <div class="col-6"><h1>Gestion de Usuarios</h1></div>
             <div class="col-3 align-self-center">
                 <div class="d-grid gap-2">
-                    <button type="button" class="btn btn-success btnAdd"  data-bs-toggle="modal" data-bs-target="#modaladd">Agregar</button>
+                    <button type="button" class="btn btn-success btnAdd"   onclick="toggleButtons()" data-bs-toggle="modal" data-bs-target="#modaladd">Agregar</button>
                 </div>                    
             </div>
         </div>        
@@ -27,7 +27,7 @@
                               <img src="${pageContext.servletContext.contextPath}/img/dolveVitaLogoAdminSmall.png" id="imgLogoSmall">                        
                             </div>    
                             <div class="col-6 mt-3">
-                                <h4 class="modal-title w-100 text-center" id="exampleModalLabel">Rigistrar Usuario</h4>              
+                                <h4 class="modal-title w-100 text-center" id="titleModal">Rigistrar Usuario</h4>              
                             </div>
                             <div class="col-3">
                                 <button type="button" class="btn-close ms-auto" style="float: right;" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarFormulario()"></button>
@@ -98,11 +98,11 @@
                                 <input type="text" class="form-control" id="password" name="password" required>
                             </div>        
 
-                            <div class="col-12" id="divadd">
+                            <div class="col-12" id="divadd" style="display: none;">
                               <button class="btn btn-success btnAdd" value="registrar" onclick="add()">Registrar</button>
                             </div>
                             
-                            <div class="col-12" id="divupdate">
+                            <div class="col-12" id="divupdate" style="display: none;">
                               <button class="btn btn-secondary" value="registrar" onclick="update()">Actualizar</button>
                             </div>
                             

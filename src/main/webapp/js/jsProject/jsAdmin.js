@@ -70,10 +70,10 @@ function cargarContenido(url,data) {
                             {
                                 targets: -1, 
                                 data: null,
-                                render: function(data, type, row) {                               
-                                    var idUsuario = row[0]; 
+                                render: function(data, type, row) {    
+                                    var idUsuario = row[0];                                      
                                     var btnActualizar = '<button class="btn btn-secondary btn-actualizar mx-1" onclick="loadata(this)" data-bs-toggle="modal" data-bs-target="#modaladd" id="' + idUsuario + '">Actualizar</button>';
-                                    var btnEliminar = '<button class="btn btn-danger btn-eliminar mx-1" data-id="' + idUsuario + '">Eliminar</button>';                                   
+                                    var btnEliminar = '<button class="btn btn-danger btn-eliminar mx-1" onclick="erase(this.id)" id="' + idUsuario + '">Eliminar</button>';                                   
                                     return btnActualizar + btnEliminar;
                                 }
                             }
@@ -93,13 +93,11 @@ function limpiarFormulario() {
     });                
 }
 
-function add(){
-    event.preventDefault(); 
-    $('#divadd').css('display', 'block');    
-    $('#divupdate').css('display', 'none');    
+function add(){    
+    event.preventDefault();        
     var servletUrl = path + '/ControllerUser?option=registrar';        
     var formData = $('#formuser').serialize();
-
+        
     $.ajax({
             type: 'POST',
             url: servletUrl,
@@ -125,18 +123,122 @@ function add(){
             error: function(xhr, status, error) {
              
             }
-    });    
+    }); 
+    
 }
 
-function loadata(btn){       
+let idBtn = "";
+
+function loadata(btn){  
+    var divupdate = document.getElementById('divupdate');
+    var divadd = document.getElementById('divadd');
+    var titulo = document.getElementById('titleModal');    
+    idBtn = btn.id;            
     
+    titulo.textContent = 'Actualizar Usuario';
+
+    if(divadd.style.display === 'block'){        
+        divadd.style.display = 'none';   
+    }    
+    divupdate.style.display = 'block';   
+
     var table = $('#tablaUsuarios').DataTable();
     var row = $(btn).closest('tr');
-    var rowData = table.row(row).data();
+    var rowData = table.row(row).data();    
     
+    $("#tipoDocumento").val(rowData[6]);
+    $("#documento").val(rowData[0]);
+    $("#nombres").val(rowData[1]);
+    $("#apellidos").val(rowData[2]);
+    $("#email").val(rowData[3]);
+    $("#direccion").val(rowData[8]);
+    $("#telefono").val(rowData[9]);
+    $("#wpp").val(rowData[4]);
+    $("#rol").val(rowData[5]);
+    $("#password").val(rowData[7]);
+        
+}  
+
+ function toggleButtons() {                    
+    var divadd = document.getElementById('divadd');
+    var divupdate = document.getElementById('divupdate');
+    var title = document.getElementById('titleModal');    
+    title.textContent = 'Registrar Usuario';
+
+    divadd.style.display = 'block';   
+
+    if(divupdate.style.display !== 'none'){
+        divupdate.style.display = 'none';   
+    }            
+} 
+
+function update(){
     
-    $('#divupdate').css('display', 'block');
-    $('#divadd').css('display', 'none');
-                      
+    event.preventDefault();  
+    
+    var servletUrl = path + '/ControllerUser?option=actualizar';        
+    var formData = $('#formuser').serialize();
+    console.log("este es: "+idBtn);
+    formData+="&documento_1="+idBtn;
+      
+     $.ajax({
+            type: 'POST',
+            url: servletUrl,
+            data: formData,
+            success: function(response) {                
+                if(response==="update"){
+                    $('#modaladd').modal('hide');
+                    Swal.fire({
+                        width: "40%",
+                        position: "center",
+                        icon: "success",
+                        title: "Actualizado Correctamente",
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then((result) => {
+                        var controller = "ControllerUser?option=listar";
+                        var url = "user.jsp";
+                        enviarSolicitudAjax(controller, url);
+                    });
+                }
+            },
+            
+            error: function(xhr, status, error) {           
+            }
+    }); 
 }
-  
+
+function erase(cc){
+    event.preventDefault();        
+    var servletUrl = path + '/ControllerUser?option=eliminar';        
+    
+    var dataerase = "documento="+cc;
+
+    $.ajax({
+        type: 'POST',
+        url: servletUrl,
+        data: dataerase,
+        success: function(response) {                
+            if(response==="eliminado"){
+                $('#modaladd').modal('hide');
+                Swal.fire({
+                    width: "40%",
+                    position: "center",
+                    icon: "success",
+                    title: "Eliminación exitosa",
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then((result) => {
+                    var controller = "ControllerUser?option=listar";
+                    var url = "user.jsp";
+                    enviarSolicitudAjax(controller, url);
+                });
+            }
+        },
+
+        error: function(xhr, status, error) {
+
+        }
+    }); 
+    
+} 
