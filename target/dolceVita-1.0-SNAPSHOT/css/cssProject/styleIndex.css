@@ -1,0 +1,194 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 30/03/2024, 9:14:10 p. m.
+    Author     : davidpuchana
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Forum&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&display=swap');
+
+*{
+  font-family: "Forum", serif;
+}
+
+hr {
+  width: 100%;
+  border: 1px solid #5c5c5c;
+  border-radius: 5px;
+  opacity: 0.6;
+}
+
+#imgLogo{
+  width: 250px;  
+}
+
+#imgLogoSmall{
+    width: 70px;
+}
+
+nav li {
+  display: inline-block;  
+  padding-top: 15px;
+  position: relative;
+}
+
+nav a {
+  color: black;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1em;
+}
+
+nav a:hover {
+  color: #000;
+}
+
+nav a::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background-color: #444;
+  position: absolute;
+  top: 0;
+  width: 0%;
+  transition: all ease-in-out 250ms;
+}
+
+nav a:hover::before {
+  width: 85%;
+}
+
+.img-center{
+  width: 110%;
+}
+
+#imgTrozoPastel{
+  width: 100%;
+  height: 100%;
+}
+
+section article{
+  background-color: #FFE6E6;
+  width: 100%;
+}
+
+.cake{
+  text-align: center;
+}
+
+.dropdown-menu li a{
+    text-align: center !important;
+}
+
+.imgCake {
+  width: 100%;
+  height: 100%;
+}
+
+.btnCake {
+  background: white;
+  border: 1px solid #000;
+  margin-top: 10px;
+  font-size: 1.2em;
+  width: 250px;
+  margin-bottom: 100px;
+}
+
+.btnCake:hover{
+  background: #545454;
+  color: white;
+  border: 1px solid #DDDDDD;  
+}
+
+footer {
+  background-color: #5c5c5c;
+  margin-top: 300px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+}
+
+/* css login */
+.modal-header {
+  display: block;
+}
+form .inputForm{
+    position: relative;
+    border-bottom: 1.5px solid #adadad;    
+}
+
+.inputForm input{
+    width: 100%;
+    padding: 0 0px;
+    height: 30px;
+    font-size: 1.2em;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.inputForm label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-40%);
+    font-size: 1.2em;
+    pointer-events: none;
+    transition: .5S;
+}
+
+.inputForm span::before{
+    content: " ";
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #9E4784;
+}
+
+.inputForm input:focus + label,
+.inputForm input:valid + label {
+  top: 1px; 
+  font-size: 1.1em; 
+  color: #9E4784;
+  margin-bottom: 20px;
+}
+
+.btnInit{
+    border-radius: 30px;
+    width: 200px;
+    text-align: center;
+    color: white;
+    font-size: 1.4em;
+    background: #9E4784;
+    border: none;
+}
+
+.inputForm:hover {
+    border-color: #9E4784; /* Color de la línea cuando el input está en hover */
+}
+
+.form-select{
+    width: 90%;
+    height: 35px;    
+    border: solid;
+    border: 1px solid #adadad;
+    border-radius: 40px;
+    font-size: 1em;            
+}
+
+.form-select option:hover{   
+    background-color: white; 
+    border-bottom: 1px solid #adadad !important;
+}
+
+article p {
+    font-size: 1.2em;
+}
