@@ -20,6 +20,7 @@ public class Usuario {
     private String whatsapp;
     private String rol;
     private String pass;
+    private Character state = '1';
 
     public Usuario() {
     }
@@ -35,7 +36,7 @@ public class Usuario {
         this.email = email;
         this.whatsapp = whatsapp;
         this.rol = rol;
-        this.pass = pass;
+        this.pass = pass;        
     }
 
     public int getIdUsuario() {
@@ -125,4 +126,13 @@ public class Usuario {
     public void setPass(String pass) {
         this.pass = pass;
     }     
+    
+    public Character getState() {
+        return state;
+    }
+
+    public void setState(Character state) {
+        this.state = state;
+    }     
+
 }

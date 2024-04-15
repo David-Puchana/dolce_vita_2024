@@ -21,7 +21,7 @@ function enviarSolicitudAjax(controller, url) {
     type: 'GET',
     url: servletUrl,
     success: function(response) {        
-            var jsonData = JSON.parse(response);
+            var jsonData = JSON.parse(response);            
             var dataTableData = [];            
             for (var i = 0; i < jsonData.length; i++) {
                 var row = [];                
@@ -38,7 +38,7 @@ function enviarSolicitudAjax(controller, url) {
                 dataTableData.push(row);
             }
             
-            cargarContenido(url,dataTableData)            
+            cargarContenido(url,dataTableData);            
     },
     error: function(xhr, status, error) {        
     }
@@ -59,6 +59,7 @@ function cargarContenido(url,data) {
                             info: 'Página _PAGE_ de _PAGES_'
                         },
                         data: data,  
+                        rowId: 'documento',
                         columnDefs: [
                             { responsivePriority: 1, targets: 0},
                             { responsivePriority: 2, targets: 1},
@@ -71,7 +72,7 @@ function cargarContenido(url,data) {
                                 data: null,
                                 render: function(data, type, row) {                               
                                     var idUsuario = row[0]; 
-                                    var btnActualizar = '<button class="btn btn-secondary btn-actualizar mx-1" data-id="' + idUsuario + '">Actualizar</button>';
+                                    var btnActualizar = '<button class="btn btn-secondary btn-actualizar mx-1" onclick="loadata(this)" data-bs-toggle="modal" data-bs-target="#modaladd" id="' + idUsuario + '">Actualizar</button>';
                                     var btnEliminar = '<button class="btn btn-danger btn-eliminar mx-1" data-id="' + idUsuario + '">Eliminar</button>';                                   
                                     return btnActualizar + btnEliminar;
                                 }
@@ -93,7 +94,9 @@ function limpiarFormulario() {
 }
 
 function add(){
-    event.preventDefault();       
+    event.preventDefault(); 
+    $('#divadd').css('display', 'block');    
+    $('#divupdate').css('display', 'none');    
     var servletUrl = path + '/ControllerUser?option=registrar';        
     var formData = $('#formuser').serialize();
 
@@ -101,13 +104,39 @@ function add(){
             type: 'POST',
             url: servletUrl,
             data: formData,
-            success: function(response) {
-                console.log("algo se ha hecho");
+            success: function(response) {                
+                if(response==="add"){
+                    $('#modaladd').modal('hide');
+                    Swal.fire({
+                        width: "40%",
+                        position: "center",
+                        icon: "success",
+                        title: "Registro exitoso",
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then((result) => {
+                        var controller = "ControllerUser?option=listar";
+                        var url = "user.jsp";
+                        enviarSolicitudAjax(controller, url);
+                    });
+                }
             },
+            
             error: function(xhr, status, error) {
-                // Manejar errores
+             
             }
     });    
 }
 
-
+function loadata(btn){       
+    
+    var table = $('#tablaUsuarios').DataTable();
+    var row = $(btn).closest('tr');
+    var rowData = table.row(row).data();
+    
+    
+    $('#divupdate').css('display', 'block');
+    $('#divadd').css('display', 'none');
+                      
+}
+  

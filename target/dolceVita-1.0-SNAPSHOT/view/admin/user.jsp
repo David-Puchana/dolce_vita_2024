@@ -94,13 +94,18 @@
                             </div>
 
                             <div class="col-md-3">
-                                <label for="validationCustom10" class="form-label">Contraseña</label>
-                                <input type="text" class="form-control" id="validationCustom10" name="password" required>
+                                <label for="password" class="form-label">Contraseña</label>
+                                <input type="text" class="form-control" id="password" name="password" required>
                             </div>        
 
-                            <div class="col-12">
-                              <button class="btn btn-secondary" value="registrar" onclick="add()">Registrar</button>
+                            <div class="col-12" id="divadd">
+                              <button class="btn btn-success btnAdd" value="registrar" onclick="add()">Registrar</button>
                             </div>
+                            
+                            <div class="col-12" id="divupdate">
+                              <button class="btn btn-secondary" value="registrar" onclick="update()">Actualizar</button>
+                            </div>
+                            
                         </form>                                                                 
                     </div>                    
                 </div>

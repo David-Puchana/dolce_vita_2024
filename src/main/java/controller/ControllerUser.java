@@ -6,6 +6,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashSet;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -73,16 +74,14 @@ public class ControllerUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {                                                          
-                String opcion = request.getParameter("option");
-                JOptionPane.showMessageDialog(null, opcion);
+                String opcion = request.getParameter("option");               
                  switch (opcion){
                      case "login": 
                         String username = request.getParameter("username");
                         String password = request.getParameter("password");
                         String role = request.getParameter("selectrole");
 
-                        user = user_dao.login(username, password, role);
-
+                        user = user_dao.login(username, password, role);                        
                         if(user.getEmail() != null)
                         {   
                             HttpSession session = request.getSession();
@@ -97,8 +96,42 @@ public class ControllerUser extends HttpServlet {
                         }                                                 
                         break;
                     case "registrar": 
+                        String tipodocumento = request.getParameter("tipoDocumento");
+                        String documento = request.getParameter("documento");
+                        String nombre = request.getParameter("nombres");
+                        String apellido = request.getParameter("apellidos");
+                        String direccion = request.getParameter("direccion");
+                        String telefono = request.getParameter("telefono");
+                        String email = request.getParameter("email");
+                        String wpp = request.getParameter("wpp");
+                        String rol = request.getParameter("rol");
+                        String pass = request.getParameter("password");
                         
+                        user.setTipoDocumento(tipodocumento);
+                        user.setDocumento(documento);
+                        user.setNombres(nombre);
+                        user.setApellidos(apellido);
+                        user.setDireccion(direccion);
+                        user.setTelefono(telefono);
+                        user.setEmail(email);
+                        user.setWhatsapp(wpp);
+                        user.setRol(rol);
+                        user.setPass(pass);
+                        
+                        boolean result = user_dao.addUsuario(user);
+                        
+                        if(result){
+                            response.getWriter().write("add");
+                        }else{
+                            response.getWriter().write("falla");
+                        }                        
                         break;
+                    case "load": 
+                        documento = request.getParameter("id");
+                        
+                        
+                        
+                        break;    
                     case "actualizar": 
                         break;
                     case "eliminar": 

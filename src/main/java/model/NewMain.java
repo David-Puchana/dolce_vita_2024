@@ -20,9 +20,9 @@ public class NewMain {
      */
     public static void main(String[] args){
         UsuarioDAO uDao = new UsuarioDAO();
-        List lista = uDao.listar();
-    
-        String json = "";
+        Usuario  user = uDao.login("felipe@Email", "asv", "Admin");
+         JOptionPane.showMessageDialog(null, user.getDireccion());
+        
         
     
     
