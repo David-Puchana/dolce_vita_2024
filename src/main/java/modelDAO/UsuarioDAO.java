@@ -24,7 +24,7 @@ public class UsuarioDAO {
     
     public Usuario login(String user, String pass, String role){
         Usuario u = new Usuario();
-        String sql = "SELECT * FROM Usuario WHERE email=? AND password=? AND rol=?";
+        String sql = "SELECT * FROM Usuario WHERE email=? AND password=? AND rol=? AND state=1";
         try{            
             Connection conn = connDB.getConnectionDB();            
             pst = conn.prepareStatement(sql);
@@ -91,7 +91,7 @@ public class UsuarioDAO {
 
     public List listar(){ 
         Connection conn = connDB.getConnectionDB(); 
-        String sql = "SELECT * FROM usuario";        
+        String sql = "SELECT * FROM usuario WHERE state=1";        
         List<Usuario> list = new ArrayList<>();
         
         try{
@@ -152,10 +152,9 @@ public class UsuarioDAO {
 
     }   
     
-    
     public boolean delete(String documento){
         Connection conn = connDB.getConnectionDB();        
-        String sql =  "DELETE FROM Usuario WHERE documento=?";
+        String sql =  "UPDATE Usuario SET state='0' WHERE documento=?";
         boolean respuesta = false;   
         try{            
             pst = conn.prepareStatement(sql);
@@ -169,4 +168,33 @@ public class UsuarioDAO {
         return respuesta;
     }   
     
+    public Usuario configuser(String cc){       
+        Usuario u = new Usuario();
+        String sql = "SELECT * FROM Usuario WHERE documento=?";
+        try{            
+            Connection conn = connDB.getConnectionDB();            
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, cc);
+            result = pst.executeQuery();
+             while(result.next()){
+                u.setTipoDocumento(result.getString("tipoDocumento"));
+                u.setDocumento(result.getString("documento"));
+                u.setNombres(result.getString("nombres"));
+                u.setApellidos(result.getString("apellidos"));
+                u.setDireccion(result.getString("direccion"));                             
+                u.setTelefono(result.getString("telefono"));
+                u.setEmail(result.getString("email"));
+                u.setWhatsapp(result.getString("whatsapp"));
+                u.setRol(result.getString("rol"));
+                u.setPass(result.getString("password"));                                
+            }                        
+            
+            conn.close();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e); 
+        }            
+        return u;        
+    }    
 }

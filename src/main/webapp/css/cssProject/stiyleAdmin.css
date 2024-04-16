@@ -33,3 +33,14 @@ hr{
     width: 80px;
 }
 
+#imgPastleria{
+    width: 100%;
+}
+
+.contenedor {
+  background-image: url('../../img/pasteleria.png');
+}
+
+.contenido-superpuesto{
+    text-align: center;
+}

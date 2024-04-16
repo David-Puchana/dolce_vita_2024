@@ -87,7 +87,9 @@ public class ControllerUser extends HttpServlet {
                        {   
                            HttpSession session = request.getSession();
                            String nombre = user.getNombres() + " " + user.getApellidos();
+                           String documento = user.getDocumento();
                            session.setAttribute("nombre", nombre);                    
+                           session.setAttribute("documento", documento);                    
                            response.getWriter().write("login:" + nombre);
                        }
                        else
@@ -106,7 +108,7 @@ public class ControllerUser extends HttpServlet {
                        String email = request.getParameter("email");
                        String wpp = request.getParameter("wpp");
                        String rol = request.getParameter("rol");
-                       String pass = request.getParameter("password");
+                       String pass = request.getParameter("password");                                              
 
                        user.setTipoDocumento(tipodocumento);
                        user.setDocumento(documento);
@@ -166,9 +168,31 @@ public class ControllerUser extends HttpServlet {
                             response.getWriter().write("eliminado");
                         }else{
                             response.getWriter().write("falla");
-                        } 
-                       
+                        }                        
                        break;    
+                   case "configuracion" :
+                        String cc = request.getParameter("documento");
+                        StringBuilder sb = new StringBuilder();                 
+                        sb.append("[");
+
+                        
+                        user = user_dao.configuser(cc);
+                                                                        
+                        sb.append("{");
+                        sb.append("\"tipoDocumento\":\"").append(user.getTipoDocumento()).append("\",");
+                        sb.append("\"documento\":\"").append(user.getDocumento()).append("\",");
+                        sb.append("\"nombre\":\"").append(user.getNombres()).append("\",");
+                        sb.append("\"apellido\":\"").append(user.getApellidos()).append("\",");
+                        sb.append("\"direccion\":\"").append(user.getDireccion()).append("\",");
+                        sb.append("\"telefono\":\"").append(user.getTelefono()).append("\",");
+                        sb.append("\"email\":\"").append(user.getEmail()).append("\",");
+                        sb.append("\"whatsapp\":\"").append(user.getWhatsapp()).append("\",");
+                        sb.append("\"rol\":\"").append(user.getRol()).append("\",");
+                        sb.append("\"password\":\"").append(user.getPass()).append("\"}]");
+                        String json = sb.toString(); 
+                        response.setContentType("text/html;charset=UTF-8");
+                        response.getWriter().write(json);                       
+                       break;  
                    default:break;   
                 }                         
     }
@@ -176,6 +200,6 @@ public class ControllerUser extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }
