@@ -3,11 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package model;
-import model.Usuario;
+import model.Cliente;
 import java.util.List;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
-import modelDAO.UsuarioDAO;
+import modelDAO.ClienteDAO;
 
 /**
  *
@@ -19,9 +19,9 @@ public class NewMain {
      * @param args the command line arguments
      */
     public static void main(String[] args){
-        UsuarioDAO uDao = new UsuarioDAO();
-        Usuario  user = uDao.login("felipe@Email", "asv", "Admin");
-         JOptionPane.showMessageDialog(null, user.getDireccion());
+        ClienteDAO uDao = new ClienteDAO();
+        Cliente  user = uDao.login("das@email.com", "123");
+         JOptionPane.showMessageDialog(null, user.getNombres());
         
         
     

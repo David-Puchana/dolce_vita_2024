@@ -1,10 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Forum&display=swap');
 *{
     font-family: "Poppins", serif;    
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+
+#row-1{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #EEEEEE;
+    border-bottom: 1px solid #5c5c5c;
+}
+
+#contenedor-principal{
+    margin-top: 120px; 
 }
 
 .dt-container{
     width: 95%;
+}
+
+.navbar-toggler{
+    float: right !important;
 }
 
 .btn{
@@ -15,15 +40,6 @@
     border-bottom: 0.5px solid white;
 }
 
-hr{
-    background-color: #EEEEEE;
-    border-bottom: 1px solid #5c5c5c;
-    
-}
-#row-1{
-    background-color: #EEEEEE;
-    border-bottom: 1px solid #5c5c5c;
-}
 
 #imgUser{
     width: 35px;
@@ -37,10 +53,22 @@ hr{
     width: 100%;
 }
 
-.contenedor {
-  background-image: url('../../img/pasteleria.png');
+#imgpasteleria_r{
+    width: 100%;
 }
 
-.contenido-superpuesto{
-    text-align: center;
+#columna_1{
+    background-color: #ac87c5;
+    color: white;        
+}
+.contenido-texto h1{
+    font-size: 1.8em;
+    font-family: "Forum", serif;
+    font-weight: 500;
+}
+
+.contenido-texto p{
+    font-size: 1.3em;
+    font-family: "Forum", serif;
+    font-weight: 300;
 }

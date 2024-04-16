@@ -1,6 +1,6 @@
 <%-- 
-    Document   : viewFormListUser
-    Created on : 9/04/2024, 4:34:31 p. m.
+    Document   : client
+    Created on : 16/04/2024, 5:43:09 a. m.
     Author     : david
 --%>
 
@@ -10,10 +10,10 @@
     
     <div class="row d-flex justify-content-center align-middle" id="divtitleusersection">        
         <div class="row my-1 d-flex justify-content-center align-middle">
-            <div class="col-6"><h1>Gestion de Usuarios</h1></div>
+            <div class="col-6"><h1>Gestion de Clientes</h1></div>
             <div class="col-3 align-self-center">
                 <div class="d-grid gap-2">
-                    <button type="button" class="btn btn-success btnAdd"   onclick="toggleButtons()" data-bs-toggle="modal" data-bs-target="#modaladd">Agregar</button>
+                    <button type="button" class="btn btn-success btnAdd"   onclick="toggleButtons()" data-bs-toggle="modal" data-bs-target="#modaladd_clientes">Agregar</button>
                 </div>                    
             </div>
         </div>        
@@ -113,16 +113,14 @@
         </div>                        
      
         <div class="col-12 d-flex justify-content-center">
-            <table id="tablaUsuarios" class="table table-striped nowrap" style="width: 100%">
+            <table id="tablaClientes" class="table table-striped nowrap" style="width: 100%">
                 <thead>    
                     <tr>                        
                         <td>Documento</td>
                         <td>Nombres</td>
                         <td>Apellidos</td>                        
                         <td>Email</td>
-                        <td>whatsapp</td>
-                        <td>Rol</td>                        
-                        <td>Tipo documento</td>
+                        <td>whatsapp</td>                    
                         <td>Contraseña</td> 
                         <td>Dirección</td>
                         <td>Teléfono</td>                                                

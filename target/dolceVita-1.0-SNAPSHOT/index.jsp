@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,43 +18,43 @@
         <title>DolceVita</title>
     </head>
     <body>
-                     
-        <nav class="navbar navbar-expand-lg bg-white my-2 mx-3">           
-            <img class="me-5" src="img/dolveVitaLogo.png" id="imgLogo">             
-            <div class="container-fluid">                  
-              <button class="navbar-toggler mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mt-1 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Nosotros</a>
-                  </li>                  
-                </ul>  
-                <ul class="navbar-nav mt-1 mb-lg-0">                            
-                     <li class="nav-item dropdown">
-                         <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="img/login.png">
-                            Login
-                         </a>
-                         <ul class="dropdown-menu">
-                            <li class="d-flex justify-content-center">
-                                <a id="loginCliente" class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalclient">Cliente</a>
-                            </li>      
-                             <li class="d-flex justify-content-center">
-                                 <a id="loginAsesor" class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalservant">Asesor</a>
-                             </li>                                                             
-                         </ul>
-                     </li>
-                 </ul>                                                                                                                
-              </div>
-            </div>            
-        </nav>                   
-        <hr>
-        
+        <div class="row" id="row-1">             
+            <nav class="navbar navbar-expand-lg bg-white">           
+                <img class="ms-5" src="img/dolveVitaLogo.png" id="imgLogo">             
+                <div class="container-fluid pb-3 ms-2">       
+                    
+                  <button class="navbar-toggler float-end" id="btnNav" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Nosotros</a>
+                      </li>                  
+                    </ul>  
+                    <ul class="navbar-nav mb-lg-0 me-5">                            
+                         <li class="nav-item dropdown">
+                             <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="img/login.png">
+                                Login
+                             </a>
+                             <ul class="dropdown-menu">
+                                <li class="d-flex justify-content-center">
+                                    <a id="loginCliente" class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalclient">Cliente</a>
+                                </li>      
+                                 <li class="d-flex justify-content-center">
+                                     <a id="loginAsesor" class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalservant">Asesor</a>
+                                 </li>                                                             
+                             </ul>
+                         </li>
+                     </ul>                                                                                                                
+                  </div>
+                </div>            
+            </nav>                   
+         </div>   
         <div class="modal fade modal-sm" id="modalclient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -130,7 +131,7 @@
             </div>
         </div>
                   
-        <div class="container">
+        <div class="container" id="contenedor-principal">
             <div class="row">
                 <img src="img/imgPastelHome.png" class="img-center"> 
             </div>        

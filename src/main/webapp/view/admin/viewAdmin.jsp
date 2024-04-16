@@ -5,11 +5,23 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="javax.servlet.http.HttpSession"%>
+<% HttpSession sessio = request.getSession(false); %>
+<% if (sessio == null || sessio.getAttribute("nombre") == null) { %>
+    <% response.sendRedirect("../../index.jsp"); %>
+<% } %>
+
+
 <!DOCTYPE html>
 <html>
-    <head>
+    <head>       
+       
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="0">
+        
         <link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/css/cssBootstrap/bootstrap.min.css">
         
         <link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/css/cssProject/stiyleAdmin.css">        
@@ -21,84 +33,82 @@
         <title>DolceVita</title>        
     </head>
     <body>
+        <div class="row" id="row-1">
+            <nav class="navbar navbar-expand-lg my-2 mx-3" id="navBar">           
+                <img class="ms-3" src="${pageContext.servletContext.contextPath}/img/dolveVitaLogoAdminSmall.png" id="imgLogo">             
+                <div class="container-fluid me-4">                  
+                    <button class="navbar-toggler mt-3 float-end" id="btnNav" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mt-1 mb-lg-0">
 
-        <div class="container-fluid">
-            <div class="row" id="row-1">
-                <div class="col-md-12" id="col-1">                                       
-                    <nav class="navbar navbar-expand-lg my-2 mx-3" id="navBar">           
-                        <img class="me-5" src="${pageContext.servletContext.contextPath}/img/dolveVitaLogoAdminSmall.png" id="imgLogo">             
-                        <div class="container-fluid">                  
-                            <button class="navbar-toggler mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                              <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <ul class="navbar-nav me-auto mt-1 mb-lg-0">
-                                    
-                                    <li class="nav-item singleOption">
-                                        <a class="nav-link active accion" aria-current="page" href="#" data-url="inicio.jsp">Inicio</a>
-                                    </li>
-                                                                        
-                                    <li class="nav-item singleOption">
-                                      <a class="nav-link active accion" aria-current="page" href="ControllerUser?option=listar" data-url="user.jsp">Usuario</a>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Inventario
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="dropdownUsuario">
-                                            <li><a class="dropdown-item text-dark accion" href="ControllerInput?option=listar" >Insumos</a></li>
-                                            <li><a class="dropdown-item text-dark accion" href="#">Productos</a></li>                          
-                                            <li><a class="dropdown-item text-dark accion" href="#">Recetas</a></li>                          
-                                            <li><a class="dropdown-item text-dark accion" href="#">Reporte</a></li>                          
-                                        </ul>
-                                    </li>
-                                  
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Facturacion
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <li><a class="dropdown-item text-dark accion" href="#">Compras</a></li>
-                                            <li><a class="dropdown-item text-dark accion" href="#">Ventas</a></li>                          
-                                        </ul>
-                                    </li>        
-                                    <li class="nav-item singleOption">
-                                      <a class="nav-link active accion" aria-current="page" href="#">Clientes</a>
-                                    </li>                                                                                                        
-                                </ul>  
-                                
-                                <ul class="navbar-nav mt-1 mb-lg-0">                            
-                                     <li class="nav-item dropdown">                                        
-                                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                           <img src="${pageContext.servletContext.contextPath}/img/login.png" id="imgUser">   
-                                           ${nombre}                                         
-                                        </a>
-                                         <ul class="dropdown-menu">
-                                            <li class="d-flex justify-content-center align-middle">  
-                                                <div class="ms-2 pt-1">
-                                                    <box-icon name='cog'></box-icon>                                                      
-                                                </div>
-                                                <a id="loginCliente" class="dropdown-item" href="#" onclick="dataConfig(${documento})" data-bs-toggle="modal" data-bs-target="#modaladd_admin">                                                                                           
-                                                    Configuración
-                                                </a>
-                                            </li>      
-                                            <li class="d-flex justify-content-center align-middle">                                                
-                                                <div class="ms-2 pt-1">
-                                                    <box-icon type='solid' name='x-square'></box-icon>                                                    
-                                                </div>
-                                                <a id="loginAsesor" class="dropdown-item" href="#">                                                                                                    
-                                                    Cerrar
-                                                </a>
-                                            </li>                                                             
-                                        </ul>
-                                    </li>
-                                </ul>                                                                                                                
-                            </div>
-                        </div>            
-                    </nav>                                                                                                                                                                                        
-                </div>                                                        
-            </div>
+                            <li class="nav-item singleOption">
+                                <a class="nav-link active accion" aria-current="page" href="#" data-url="inicio.jsp">Inicio</a>
+                            </li>
 
+                            <li class="nav-item singleOption">
+                              <a class="nav-link active accion" aria-current="page" href="ControllerUser?option=listar" data-url="user.jsp">Usuario</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Producción
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="dropdownUsuario">
+                                    <li><a class="dropdown-item text-dark accion" href="ControllerInput?option=listar" >Insumos</a></li>
+                                    <li><a class="dropdown-item text-dark accion" href="#">Productos</a></li>                          
+                                    <li><a class="dropdown-item text-dark accion" href="#">Recetas</a></li>                          
+                                    <li><a class="dropdown-item text-dark accion" href="#">Reporte</a></li>                          
+                                    <li><a class="dropdown-item text-dark accion" href="#">Proveedores</a></li>                          
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Facturacion
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a class="dropdown-item text-dark accion" href="#">Compras</a></li>
+                                    <li><a class="dropdown-item text-dark accion" href="#">Ventas</a></li>                          
+                                </ul>
+                            </li>        
+                            <li class="nav-item singleOption">
+                              <a class="nav-link active accion" aria-current="page" href="#">Clientes</a>
+                            </li>                                                                                                        
+                        </ul>  
+
+                        <ul class="navbar-nav mt-1 mb-lg-0">                            
+                             <li class="nav-item dropdown">                                        
+                                <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                   <img src="${pageContext.servletContext.contextPath}/img/login.png" id="imgUser">   
+                                   ${nombre}                                         
+                                </a>
+                                 <ul class="dropdown-menu">
+                                    <li class="d-flex justify-content-center align-middle">  
+                                        <div class="ms-2 pt-1">
+                                            <box-icon name='cog'></box-icon>                                                      
+                                        </div>
+                                        <a id="loginCliente" class="dropdown-item" href="#" onclick="dataConfig(${documento})" data-bs-toggle="modal" data-bs-target="#modaladd_admin">                                                                                           
+                                            Configuración
+                                        </a>
+                                    </li>      
+                                    <li class="d-flex justify-content-center align-middle">                                                
+                                        <div class="ms-2 pt-1">
+                                            <box-icon type='solid' name='x-square'></box-icon>                                                    
+                                        </div>
+                                        <a id="loginAsesor" class="dropdown-item" href="${pageContext.servletContext.contextPath}/ControllerUser?option=logout">                                                                                                    
+                                            Cerrar
+                                        </a>
+                                    </li>                                                             
+                                </ul>
+                            </li>
+                        </ul>                                                                                                                
+                    </div>
+                </div>            
+            </nav>                                                                                                                                                                                                                                                            
+        </div>
+        
+        <div class="container-fluid" id="contenedor-principal">
             <div class="modal fade modal-lg" id="modaladd_admin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -189,24 +199,25 @@
                 </div>
             </div>                        
     
-            <div class="row" id="view-data">                                            
-                <div class="contenedor">                    
-                     <div class="contenido-texto">
-                        <h1 class="my-3 mx-3">¡Bienvenido a software de administración Dolce Vita!</h1>
-                        <p>Con nuestra plataforma, podrás llevar un control completo de tus inventarios, 
-                            optimizar el proceso de facturación y gestionar fácilmente a tus usuarios.</p>
-                        <p>En Dolce Vita, entendemos las complejidades del negocio de la pastelería y estamos comprometidos
-                           a ofrecerte las herramientas necesarias para simplificar tus operaciones diarias. Con nuestras
-                           funciones de gestión de inventarios, podrás mantener un registro preciso de todos los ingredientes
-                           y productos, asegurándote de tener siempre lo que necesitas al alcance de tu mano.
-                           Además, nuestra plataforma te permite realizar un seguimiento detallado de las ventas y generar
-                           informes personalizados para analizar el rendimiento de tu negocio.</p>                                        
-                        <p>Con nuestras características de facturación intuitivas, podrás crear facturas de manera rápida y precisa,
-                            garantizando una experiencia sin complicaciones tanto para ti como para tus clientes. Y gracias a nuestra
-                            gestión de usuarios, puedes asignar roles y permisos a tu equipo de trabajo, asegurando que cada miembro
-                            tenga acceso solo a la información relevante para sus responsabilidades.</p>
-
-                    </div>                                                         
+            <div class="row my-3 d-flex justify-content-center" id="view-data">                                            
+                <div class="row">      
+                    <div class="col-md-6" id="columna_1">                                        
+                        <div class="contenido-texto pt-3 mx-3 mt-3">
+                           <h1 class="my-3 mx-auto text-center">¡Bienvenido al software de administración Dolce Vita!</h1>
+                   
+                           <p>En Dolce Vita, entendemos las complejidades del negocio y te ofrecemos las herramientas necesarias
+                              para simplificar tus operaciones diarias. Con nuestras
+                              funciones podrás mantener un registro preciso de todos los ingredientes
+                              y productos, asegurándote de tener siempre lo que necesitas al alcance de tu mano.
+                              Además, nuestra plataforma te permite realizar un seguimiento detallado de las ventas y generar
+                              informes personalizados para analizar el rendimiento de tu negocio.</p>                                        
+                           <p>Con nuestras características de facturación intuitivas, podrás crear facturas de manera rápida y precisa,
+                               garantizando una experiencia sin complicaciones tanto para ti como para tus clientes.</p>
+                        </div>        
+                    </div>
+                    <div class="col-md-6">
+                        <img src="${pageContext.servletContext.contextPath}/img/pasteleria_r.png" id="imgpasteleria_r">
+                    </div>    
                 </div>
                
             </div>

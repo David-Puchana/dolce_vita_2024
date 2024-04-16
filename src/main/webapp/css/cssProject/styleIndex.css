@@ -14,11 +14,30 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   font-family: "Forum", serif;
 }
 
-hr {
-  width: 100%;
-  border: 1px solid #5c5c5c;
-  border-radius: 5px;
-  opacity: 0.6;
+body{
+    margin: 0;
+    padding: 0;
+}
+
+
+#row-1{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #5c5c5c;
+    height: 22%;
+}
+
+#contenedor-principal{
+    margin-top: 130px;
+}
+
+#btnNav{
+    float: right;
 }
 
 #imgLogo{
