@@ -37,7 +37,21 @@ enlaces.forEach(function(enlace) {
             };
             xhr.send();            
         }else{
-            enviarSolicitudAjax(controller, url);
+            var rutaController = controller.split("?")[0];
+            switch (rutaController){                    
+                case "ControllerUser": 
+                    enviarSolicitudAjax(controller, url);
+                    break;
+                case "ControllerCliente": 
+                    console.log("aqui");
+                    enviarSolicitudCliente(controller, url);
+                    break;
+                case "ControllerProveedor":
+                    enviarSolicitudProveedor(controller, url);
+                    break;
+                default:
+                    break;                        
+            }    
         }        
     });
 });

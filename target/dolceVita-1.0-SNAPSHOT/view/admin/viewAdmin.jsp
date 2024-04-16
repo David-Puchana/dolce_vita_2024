@@ -20,13 +20,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
         <meta http-equiv="Pragma" content="no-cache">
-        <meta http-equiv="Expires" content="0">
-        
-        <link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/css/cssBootstrap/bootstrap.min.css">
-        
+        <meta http-equiv="Expires" content="0">        
+        <link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/css/cssBootstrap/bootstrap.min.css">        
         <link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/css/cssProject/stiyleAdmin.css">        
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>       
-                
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>                       
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css">        
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.3/css/dataTables.bootstrap5.css">        
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/3.0.1/css/responsive.bootstrap5.css">
@@ -59,7 +56,7 @@
                                     <li><a class="dropdown-item text-dark accion" href="#">Productos</a></li>                          
                                     <li><a class="dropdown-item text-dark accion" href="#">Recetas</a></li>                          
                                     <li><a class="dropdown-item text-dark accion" href="#">Reporte</a></li>                          
-                                    <li><a class="dropdown-item text-dark accion" href="#">Proveedores</a></li>                          
+                                    <li><a class="dropdown-item text-dark accion" href="ControllerProveedor?option=listar" data-url="proveedor.jsp">Proveedores</a></li>                          
                                 </ul>
                             </li>
 
@@ -73,7 +70,7 @@
                                 </ul>
                             </li>        
                             <li class="nav-item singleOption">
-                              <a class="nav-link active accion" aria-current="page" href="#">Clientes</a>
+                              <a class="nav-link active accion" aria-current="page" href="ControllerCliente?option=listar" data-url="client.jsp">Clientes</a>
                             </li>                                                                                                        
                         </ul>  
 
@@ -238,5 +235,7 @@
         </script>
                       
         <script src="${pageContext.servletContext.contextPath}/js/jsProject/jsUser.js"></script>
+        <script src="${pageContext.servletContext.contextPath}/js/jsProject/jsClient.js"></script>
+        <script src="${pageContext.servletContext.contextPath}/js/jsProject/jsProveedor.js"></script>
     </body>
 </html>

@@ -13,12 +13,12 @@
             <div class="col-6"><h1>Gestion de Clientes</h1></div>
             <div class="col-3 align-self-center">
                 <div class="d-grid gap-2">
-                    <button type="button" class="btn btn-success btnAdd"   onclick="toggleButtons()" data-bs-toggle="modal" data-bs-target="#modaladd_clientes">Agregar</button>
+                    <button type="button" class="btn btn-success btnAdd"   onclick="toggleButtonsClient()" data-bs-toggle="modal" data-bs-target="#modaladd_clientes">Agregar</button>
                 </div>                    
             </div>
         </div>        
         <hr>
-        <div class="modal fade modal-lg" id="modaladd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade modal-lg" id="modaladd_clientes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -36,15 +36,7 @@
                     </div>              
                     <div class="modal-body mx-1">           
         
-                        <form class="row g-4 needs-validation" id="formuser" novalidate>
-                            <div class="col-md-3">
-                                <label for="tipoDocumento" class="form-label">Tipo de documento</label>
-                                <select class="form-select" id="tipoDocumento" name="tipoDocumento" required>
-                                  <option selected disabled value="">Seleccione</option>
-                                  <option value="CC">Cédula</option>
-                                  <option value="PASAPORTE">Pasaporte</option>
-                                </select>     
-                            </div>
+                        <form class="row g-4 needs-validation" id="formclient" novalidate>
 
                             <div class="col-md-3">
                               <label for="documento" class="form-label">N° documento</label>
@@ -60,7 +52,12 @@
                               <label for="apellidos" class="form-label">Apellidos</label>
                               <input type="text" class="form-control" id="apellidos" pattern="[a-zA-Z]{3,}" title="Los apellidos debe contener al menos tres letras y no puede contener números ni caracteres especiales." name="apellidos" required>
                             </div>
-
+                            
+                            <div class="col-sm-3">
+                                <label for="wpp" class="form-label">Whatsapp</label>
+                                <input type="text" class="form-control" id="wpp" name="wpp" required>
+                            </div>        
+                            
                             <div class="col-md-4">
                                 <label for="email" class="form-label">Email</label>
                                 <div class="input-group has-validation">
@@ -74,23 +71,9 @@
                                 <input type="text" class="form-control" id="direccion" name="direccion"  pattern=".{4,}" title="La dirección debe tener al menos 4 caracteres." required>                    
                             </div>
 
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <label for="telefono" class="form-label">Teléfono</label>
                                 <input type="text" class="form-control" id="telefono" name="telefono">
-                            </div>
-
-                            <div class="col-sm-2">
-                                <label for="wpp" class="form-label">Whatsapp</label>
-                                <input type="text" class="form-control" id="wpp" name="wpp" required>
-                            </div>        
-
-                            <div class="col-md-3">
-                                <label for="rol" class="form-label">Rol</label>
-                                <select class="form-select" id="rol" name="rol" required>
-                                  <option selected disabled value="">Seleccione</option>
-                                  <option>Admin</option>
-                                  <option>Asesor</option>
-                                </select>
                             </div>
 
                             <div class="col-md-3">
@@ -99,11 +82,11 @@
                             </div>        
 
                             <div class="col-12" id="divadd" style="display: none;">
-                              <button class="btn btn-success btnAdd" value="registrar" onclick="add()">Registrar</button>
+                              <button class="btn btn-success btnAdd" value="registrar" onclick="addClient()">Registrar</button>
                             </div>
                             
                             <div class="col-12" id="divupdate" style="display: none;">
-                                <button class="btn btn-secondary" value="actualizar" onclick="update()">Actualizar</button>
+                                <button class="btn btn-secondary" value="actualizar" onclick="updateClient()">Actualizar</button>
                             </div>
                             
                         </form>                                                                 

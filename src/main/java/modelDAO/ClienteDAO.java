@@ -111,7 +111,7 @@ public class ClienteDAO {
         return list;        
     }   
 
-    public boolean updateUser(Cliente cliente, String idDocument){
+    public boolean updateClient(Cliente cliente, String idDocument){
         Connection conn = connDB.getConnectionDB();     
         boolean respuesta = false;   
         String sql = "UPDATE Cliente SET documento=?, nombres=?, apellidos=?,"+
