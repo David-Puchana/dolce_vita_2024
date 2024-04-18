@@ -234,8 +234,9 @@
             window.path = "${pageContext.request.contextPath}";
         </script>
                       
-        <script src="${pageContext.servletContext.contextPath}/js/jsProject/jsUser.js"></script>
+        
         <script src="${pageContext.servletContext.contextPath}/js/jsProject/jsClient.js"></script>
         <script src="${pageContext.servletContext.contextPath}/js/jsProject/jsProveedor.js"></script>
+        <script src="${pageContext.servletContext.contextPath}/js/jsProject/jsUser1.js"></script>
     </body>
 </html>

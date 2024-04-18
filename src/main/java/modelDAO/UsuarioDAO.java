@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package modelDAO;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import  connection.ConnectionDB;
 
 import model.Usuario;
@@ -12,6 +13,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  *
@@ -51,7 +53,7 @@ public class UsuarioDAO {
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null, e); 
+            return u; 
         }    
         
         return u;
@@ -62,7 +64,7 @@ public class UsuarioDAO {
         String sql = "INSERT INTO Usuario (tipoDocumento,documento,nombres,apellidos,"+
                      "direccion,telefono,email,whatsapp,rol,password,state)"+
                      "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-        boolean respuesta = false;    
+          
         try{
             Connection conn = connDB.getConnectionDB();            
 
@@ -79,17 +81,16 @@ public class UsuarioDAO {
             pst.setString(10, user.getPass());
             pst.setString(11, "1");
             pst.executeUpdate();
-            respuesta = true;
+            
 
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);            
+        }catch(Exception e){                     
             return false;
         }           
 
-        return respuesta;
+        return true;
     }   
 
-    public List listar(){ 
+    public String listar() throws JsonProcessingException{ 
         Connection conn = connDB.getConnectionDB(); 
         String sql = "SELECT * FROM usuario WHERE state=1";        
         List<Usuario> list = new ArrayList<>();
@@ -116,15 +117,19 @@ public class UsuarioDAO {
             }
             
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);            
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(list);
+            return json;            
         }
         
-        return list;        
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(list);
+        
+        return json;        
     }   
 
     public boolean updateUser(Usuario user, String idDocument){
-        Connection conn = connDB.getConnectionDB();     
-        boolean respuesta = false;   
+        Connection conn = connDB.getConnectionDB();              
         String sql = "UPDATE Usuario SET tipoDocumento=?, documento=?, nombres=?, apellidos=?,"+
                      " direccion=?, telefono=?, email=?, whatsapp=?,rol=?,password=? WHERE documento=?";
         
@@ -142,33 +147,29 @@ public class UsuarioDAO {
             pst.setString(10, user.getPass());
             pst.setString(11, idDocument);
             pst.executeUpdate();
-            respuesta = true;
-            
+                      
         }catch(Exception e){
-            respuesta = false;
-            JOptionPane.showMessageDialog(null, e);            
+            return false;            
         }
-        return respuesta;
+        return true;
 
     }   
     
     public boolean delete(String documento){
         Connection conn = connDB.getConnectionDB();        
         String sql =  "UPDATE Usuario SET state='0' WHERE documento=?";
-        boolean respuesta = false;   
+        
         try{            
             pst = conn.prepareStatement(sql);
             pst.setString(1, documento);
-            pst.executeUpdate();
-            respuesta = true;
+            pst.executeUpdate();            
         }catch(Exception e){
-            respuesta = false;
-            JOptionPane.showMessageDialog(null, e);            
+            return false;            
         }
-        return respuesta;
+        return true;
     }   
     
-    public Usuario configuser(String cc){       
+    public String configuser(String cc) throws JsonProcessingException{       
         Usuario u = new Usuario();
         String sql = "SELECT * FROM Usuario WHERE documento=?";
         try{            
@@ -193,8 +194,12 @@ public class UsuarioDAO {
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null, e); 
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(u);
+            return json;                
         }            
-        return u;        
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(u);        
+        return json;        
     }    
 }

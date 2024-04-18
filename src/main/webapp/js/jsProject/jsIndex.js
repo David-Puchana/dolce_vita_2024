@@ -14,12 +14,11 @@ $(document).ready(function() {
   $('#formservant').submit(function(event) {
     event.preventDefault();
     var formData = {
-      username: $('#user').val(),
+      email: $('#user').val(),
       password: $('#password').val(),
-      selectrole: $('#selectrole').val(),     
+      rol: $('#selectrole').val(),     
       option: 'login'
-    };
-            
+    };      
     $.ajax({
       type: 'POST',
       url: 'ControllerUser',
@@ -42,9 +41,7 @@ $(document).ready(function() {
                 if (result.dismiss === Swal.DismissReason.timer) {
                     window.location.href = "view/admin/viewAdmin.jsp";                                        
                 }
-               });         
-            
-            
+               });                                 
         } else {
             Swal.fire({
               icon: "error",

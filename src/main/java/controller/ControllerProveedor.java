@@ -71,15 +71,79 @@ public class ControllerProveedor extends HttpServlet {
                     session.invalidate(); 
                 }    
                 response.sendRedirect("index.jsp");                                                                 
-            }
-        
-        
+            }                
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            response.setHeader("Pragma", "no-cache");
+            response.setDateHeader("Expires", 0);
+
+            String opcion = request.getParameter("option");   
+
+            switch (opcion){                    
+               case "registrar":                    
+                   String nit = request.getParameter("nit");
+                   String razonsocial = request.getParameter("razonsocial");                   
+                   String direccion = request.getParameter("direccion");
+                   String telefono = request.getParameter("telefono");
+                   String email = request.getParameter("email");
+                   String wpp = request.getParameter("wpp");
+                   
+                   
+                   proveedor.setNit(nit);
+                   proveedor.setRazonSocial(razonsocial);                   
+                   proveedor.setDireccion(direccion);
+                   proveedor.setTelefono(telefono);
+                   proveedor.setEmail(email);
+                   proveedor.setWhatsapp(wpp);                   
+                   
+                   boolean result = proveedor_dao.addProveedor(proveedor);
+                                      
+                   if(result){
+                       response.getWriter().write("add");
+                   }else{
+                       response.getWriter().write("falla");
+                   }                        
+                   break;   
+               case "actualizar": 
+                   String nit_1 = request.getParameter("nit");
+                   String razonsocial_1 = request.getParameter("razonsocial");                   
+                   String direccion_1 = request.getParameter("direccion");
+                   String telefono_1 = request.getParameter("telefono");
+                   String email_1 = request.getParameter("email");
+                   String wpp_1 = request.getParameter("wpp");
+                   String documento_id =  request.getParameter("documento_1");
+                   
+                   proveedor.setNit(nit_1);
+                   proveedor.setRazonSocial(razonsocial_1);                   
+                   proveedor.setDireccion(direccion_1);
+                   proveedor.setTelefono(telefono_1);
+                   proveedor.setEmail(email_1);
+                   proveedor.setWhatsapp(wpp_1);                   
+                                                      
+                   boolean result_1 = proveedor_dao.updateProveedor(proveedor,documento_id);
+
+                   if(result_1){
+                       response.getWriter().write("update");
+                   }else{
+                       response.getWriter().write("falla");
+                   }     
+                   break;
+               case "eliminar": 
+                    String documento_2 = request.getParameter("nit");
+                    boolean result_2 = proveedor_dao.delete(documento_2);
+                    if(result_2){
+                        response.getWriter().write("eliminado");
+                    }else{
+                        response.getWriter().write("falla");
+                    }                        
+                   break;    
+               default:
+                   break;   
+            }                         
     }
 
     @Override

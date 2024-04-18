@@ -10,8 +10,7 @@ function enviarSolicitudProveedor(controller, url) {
     url: servletUrl,
     success: function(response) {        
             var jsonData = JSON.parse(response);  
-            console.log(response);
-            
+                        
             var dataTableData = [];            
             for (var i = 0; i < jsonData.length; i++) {
                 var row = [];                
@@ -94,6 +93,7 @@ function addProveedor(){
     var form_add = document.getElementById('formproveedor');
     if (form_add.checkValidity()) {
       var formData = $('#formproveedor').serialize();     
+      console.log(formData);
           $.ajax({
             type: 'POST',
             url: servletUrl,
@@ -144,27 +144,28 @@ function loadataProveedor(btn){
     }    
     divupdate.style.display = 'block';   
 
-    var table = $('#tablaClientes').DataTable();
+    var table = $('#tablaProveedores').DataTable();
     var row = $(btn).closest('tr');
     var rowData = table.row(row).data();    
         
-    $("#documento").val(rowData[0]);
-    $("#nombres").val(rowData[1]);
-    $("#apellidos").val(rowData[2]);
-    $("#email").val(rowData[3]);
-    $("#wpp").val(rowData[4]);
-    $("#password").val(rowData[5]);        
-    $("#direccion").val(rowData[6]);
-    $("#telefono").val(rowData[7]);            
+    $("#nit").val(rowData[0]);
+    $("#razonsocial").val(rowData[1]);
+    $("#direccion").val(rowData[2]);
+    $("#telefono").val(rowData[3]);            
+    $("#email").val(rowData[4]);
+    $("#wpp").val(rowData[5]);
+    
+    
+    
 }  
 
-function updateClient(){
+function updateProveedor(){
     
     event.preventDefault();  
     
-    var servletUrl = path + '/ControllerCliente?option=actualizar';        
-    var formData = $('#formclient').serialize();        
-    formData+="&documento_1="+idBtnCliente;
+    var servletUrl = path + '/ControllerProveedor?option=actualizar';        
+    var formData = $('#formproveedor').serialize();        
+    formData+="&documento_1="+idBtnProveedor;
        
      $.ajax({
             type: 'POST',
@@ -172,7 +173,7 @@ function updateClient(){
             data: formData,
             success: function(response) {                
                 if(response==="update"){
-                    $('#modaladd_clientes').modal('hide');
+                    $('#modaladd_proveedores').modal('hide');
                     Swal.fire({
                         width: "40%",
                         position: "center",
@@ -181,9 +182,9 @@ function updateClient(){
                         showConfirmButton: false,
                         timer: 1500
                     }).then((result) => {
-                        var controller = "ControllerCliente?option=listar";
-                        var url = "client.jsp";
-                        enviarSolicitudCliente(controller, url);
+                        var controller = "ControllerProveedor?option=listar";
+                        var url = "proveedor.jsp";
+                        enviarSolicitudProveedor(controller, url);
                     });
                 }
             },
@@ -193,11 +194,11 @@ function updateClient(){
     }); 
 }
 
-function eraseProveedor(cc){
+function eraseProveedor(nit){
     event.preventDefault();        
-    var servletUrl = path + '/ControllerCliente?option=eliminar';        
+    var servletUrl = path + '/ControllerProveedor?option=eliminar';        
     
-    var dataerase = "documento="+cc;
+    var dataerase = "nit="+nit;
 
     $.ajax({
         type: 'POST',
@@ -205,7 +206,7 @@ function eraseProveedor(cc){
         data: dataerase,
         success: function(response) {                
             if(response==="eliminado"){
-                $('#modaladd_clientes').modal('hide');
+                $('#modaladd_proveedores').modal('hide');
                 Swal.fire({
                     width: "40%",
                     position: "center",
@@ -214,9 +215,9 @@ function eraseProveedor(cc){
                     showConfirmButton: false,
                     timer: 1500
                 }).then((result) => {
-                    var controller = "ControllerCliente?option=listar";
-                    var url = "client.jsp";
-                    enviarSolicitudCliente(controller, url);
+                    var controller = "ControllerProveedor?option=listar";
+                    var url = "proveedor.jsp";
+                    enviarSolicitudProveedor(controller, url);
                 });
             }
         },

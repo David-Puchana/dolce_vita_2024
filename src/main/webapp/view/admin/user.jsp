@@ -36,7 +36,7 @@
                     </div>              
                     <div class="modal-body mx-1">           
         
-                        <form class="row g-4 needs-validation" id="formuser" novalidate>
+                        <form class="form row g-4" id="formuser">
                             <div class="col-md-3">
                                 <label for="tipoDocumento" class="form-label">Tipo de documento</label>
                                 <select class="form-select" id="tipoDocumento" name="tipoDocumento" required>
@@ -48,30 +48,30 @@
 
                             <div class="col-md-3">
                               <label for="documento" class="form-label">N° documento</label>
-                              <input type="text" class="form-control" id="documento" name="documento" pattern=".{11,}" title="El campo debe contener al menos 11 caracteres." required>
+                              <input type="text" class="form-control" id="documento" name="documento" required>
                             </div>
 
                             <div class="col-md-3">
                               <label for="nombres" class="form-label" >Nombres</label>
-                              <input type="text" class="form-control" id="nombres" name="nombres" pattern="[a-zA-Z]{3,}" title="Los nombres debe contener al menos tres letras y no puede contener números ni caracteres especiales." required>
+                              <input type="text" class="form-control" id="nombres" name="nombres" required>
                             </div>
 
                             <div class="col-md-3">
                               <label for="apellidos" class="form-label">Apellidos</label>
-                              <input type="text" class="form-control" id="apellidos" pattern="[a-zA-Z]{3,}" title="Los apellidos debe contener al menos tres letras y no puede contener números ni caracteres especiales." name="apellidos" required>
+                              <input type="text" class="form-control" id="apellidos" name="apellidos" required>
                             </div>
 
                             <div class="col-md-4">
                                 <label for="email" class="form-label">Email</label>
                                 <div class="input-group has-validation">
                                   <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                  <input type="email" class="form-control" id="email" name="email" aria-describedby="inputGroupPrepend" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Ingrese un correo electrónico válido" required>
+                                  <input type="email" class="form-control" id="email" name="email" aria-describedby="inputGroupPrepend" required>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <label for="direccion" class="form-label">Dirección</label>
-                                <input type="text" class="form-control" id="direccion" name="direccion"  pattern=".{4,}" title="La dirección debe tener al menos 4 caracteres." required>                    
+                                <input type="text" class="form-control" id="direccion" name="direccion" required>                    
                             </div>
 
                             <div class="col-sm-2">
@@ -95,7 +95,7 @@
 
                             <div class="col-md-3">
                                 <label for="password" class="form-label">Contraseña</label>
-                                <input type="text" class="form-control" id="password" name="password" pattern=".{4,}" title="La contraseña debe tener al menos 4 caracteres." required>
+                                <input type="text" class="form-control" id="password" name="password" required>
                             </div>        
 
                             <div class="col-12" id="divadd" style="display: none;">
@@ -103,7 +103,7 @@
                             </div>
                             
                             <div class="col-12" id="divupdate" style="display: none;">
-                                <button class="btn btn-secondary" value="actualizar" onclick="update()">Actualizar</button>
+                                <button class="btn btn-secondary" onclick="update()">Actualizar</button>
                             </div>
                             
                         </form>                                                                 

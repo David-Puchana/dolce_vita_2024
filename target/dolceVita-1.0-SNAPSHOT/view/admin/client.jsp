@@ -62,7 +62,7 @@
                                 <label for="email" class="form-label">Email</label>
                                 <div class="input-group has-validation">
                                   <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                  <input type="email" class="form-control" id="email" name="email" aria-describedby="inputGroupPrepend" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Ingrese un correo electrónico válido" required>
+                                  <input type="email" class="form-control" id="email" name="email" aria-describedby="inputGroupPrepend" >
                                 </div>
                             </div>
 

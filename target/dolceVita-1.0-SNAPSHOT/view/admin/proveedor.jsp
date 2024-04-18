@@ -90,10 +90,10 @@
                     <tr>                        
                         <td>Nit</td>
                         <td>Razón Social</td>                        
-                        <td>whatsapp</td>    
-                        <td>Email</td>                                                                
                         <td>Dirección</td>
-                        <td>Teléfono</td>                                                
+                        <td>Teléfono</td>
+                        <td>Email</td>       
+                        <td>whatsapp</td>                                                                            
                         <td>Acciones</td>
                     </tr>
                 </thead>

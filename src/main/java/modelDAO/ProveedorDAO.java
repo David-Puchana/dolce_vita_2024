@@ -26,9 +26,9 @@ public class ProveedorDAO {
     
     public boolean addProveedor(Proveedor proveedor){
        
-        String sql = "INSERT INTO Proveedor (razonSocial,nit/documento,"+
+        String sql = "INSERT INTO Proveedor (razonSocial,nit,"+
                      "direccion,telefono,email,whatsapp, state)"+
-                     "VALUES (?,?,?,?,?,?,?,?,?)";
+                     "VALUES (?,?,?,?,?,?,?)";
         boolean respuesta = false;    
         try{
             Connection conn = connDB.getConnectionDB();            
@@ -40,7 +40,7 @@ public class ProveedorDAO {
             pst.setString(4, proveedor.getTelefono());
             pst.setString(5, proveedor.getEmail());
             pst.setString(6, proveedor.getWhatsapp());                        
-            pst.setString(9, "1");
+            pst.setString(7, "1");
             pst.executeUpdate();
             respuesta = true;
 
@@ -80,8 +80,8 @@ public class ProveedorDAO {
     public boolean updateProveedor(Proveedor proveedor, String idDocument){
         Connection conn = connDB.getConnectionDB();     
         boolean respuesta = false;   
-        String sql = "UPDATE Proveedor SET razonSocial=?, nit/documento=?,"+
-                     " direccion=?, telefono=?, email=?, whatsapp=? WHERE documento=?";
+        String sql = "UPDATE Proveedor SET razonSocial=?, nit=?,"+
+                     " direccion=?, telefono=?, email=?, whatsapp=? WHERE nit=?";
         
         try{
             pst = conn.prepareStatement(sql);           
@@ -91,7 +91,7 @@ public class ProveedorDAO {
             pst.setString(4, proveedor.getTelefono());
             pst.setString(5, proveedor.getEmail());
             pst.setString(6,proveedor.getWhatsapp());            
-            pst.setString(9, idDocument);
+            pst.setString(7, idDocument);
             pst.executeUpdate();
             respuesta = true;
             
@@ -105,7 +105,7 @@ public class ProveedorDAO {
     
     public boolean delete(String documento){
         Connection conn = connDB.getConnectionDB();        
-        String sql =  "UPDATE Proveedor SET state='0' WHERE documento=?";
+        String sql =  "UPDATE Proveedor SET state='0' WHERE nit=?";
         boolean respuesta = false;   
         try{            
             pst = conn.prepareStatement(sql);

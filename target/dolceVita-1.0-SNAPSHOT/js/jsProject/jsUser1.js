@@ -2,22 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
-(() => {
-  const forms = document.querySelectorAll('.needs-validation');
-
-  // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-
-      form.classList.add('was-validated');
-    }, false);
-  });
-})();
-
 var enlaces = document.querySelectorAll(".accion");
 
 enlaces.forEach(function(enlace) {
@@ -62,18 +46,19 @@ function enviarSolicitudAjax(controller, url) {
     type: 'GET',
     url: servletUrl,
     success: function(response) {        
+            console.log(response);
             var jsonData = JSON.parse(response);            
             var dataTableData = [];            
             for (var i = 0; i < jsonData.length; i++) {
                 var row = [];                
                 row.push(jsonData[i].documento);
-                row.push(jsonData[i].nombre);
-                row.push(jsonData[i].apellido);                
+                row.push(jsonData[i].nombres);
+                row.push(jsonData[i].apellidos);                
                 row.push(jsonData[i].email);
                 row.push(jsonData[i].whatsapp);                
                 row.push(jsonData[i].rol);
                 row.push(jsonData[i].tipoDocumento);
-                row.push(jsonData[i].password);                                  
+                row.push(jsonData[i].pass);                                  
                 row.push(jsonData[i].direccion);
                 row.push(jsonData[i].telefono);                                                              
                 dataTableData.push(row);
@@ -102,8 +87,7 @@ function cargarContenido(url,data) {
                             lengthMenu: 'Mostrar _MENU_  registros por página',
                             info: 'Página _PAGE_ de _PAGES_'
                         },
-                        data: data,  
-                        rowId: 'documento',
+                        data: data,                          
                         columnDefs: [
                             { responsivePriority: 1, targets: 0},
                             { responsivePriority: 2, targets: 1},
@@ -132,52 +116,48 @@ function cargarContenido(url,data) {
 } 
 
 function limpiarFormulario() {
+    
     const forms = document.querySelectorAll(".form");
-    forms.forEach(form =>{
+    forms.forEach(form =>{      
         form.reset();
     });                
 }
 
 function add(){    
     event.preventDefault();        
-    var servletUrl = path + '/ControllerUser?option=registrar';     
-    
-    var form_add = document.getElementById('formuser');
-    if (form_add.checkValidity()) {
-      var formData = $('#formuser').serialize();
-          $.ajax({
-            type: 'POST',
-            url: servletUrl,
-            data: formData,
-            success: function(response) {                
-                if(response==="add"){
-                    $('#modaladd').modal('hide');
-                    Swal.fire({
-                        width: "40%",
-                        position: "center",
-                        icon: "success",
-                        title: "Registro exitoso",
-                        showConfirmButton: false,
-                        timer: 1500
-                    }).then((result) => {
-                        var controller = "ControllerUser?option=listar";
-                        var url = "user.jsp";
-                        enviarSolicitudAjax(controller, url);
-                    });
-                }
-            },
-            error: function(xhr, status, error) {
-            }
-        }); 
-    } else {
-        Swal.fire({
-           icon: "error",
-           title: "Oops...",
-           text: 'Algunos de los campos estan mal diligenciados o imcompletos, revise y vuelva a intentarlo',
-           showConfirmButton: false,
-           timer: 2500
-         }); 
-    }
+    var servletUrl = path + '/ControllerUser?option=registrar';      
+    var form_add = document.getElementById('formuser');                
+    var formData = $('#formuser').serialize();
+    console.log(formData);
+        
+        $.ajax({
+          type: 'POST',
+          url: servletUrl,
+          data: formData,
+          success: function(response) {                
+              if(response==="add"){
+                  $('#modaladd').modal('hide');
+                  Swal.fire({
+                      width: "40%",
+                      position: "center",
+                      icon: "success",
+                      title: "Registro exitoso",
+                      showConfirmButton: false,
+                      timer: 1500
+                  }).then((result) => {
+                      var controller = "ControllerUser?option=listar";
+                      var url = "user.jsp";
+                      enviarSolicitudAjax(controller, url);
+                  });
+              }else{
+                 console.log("la cagaste");
+              }
+          },
+          error: function(xhr, status, error) {
+             
+          }
+      }); 
+       
 }
 
 let idBtn = "";
@@ -295,7 +275,7 @@ function erase(cc){
     
     };
 
-function  dataConfig(cc){
+function dataConfig(cc){
     event.preventDefault();        
     var servletUrl = path + '/ControllerUser?option=configuracion';        
     var datos = {documento:cc};
@@ -304,18 +284,18 @@ function  dataConfig(cc){
     type: 'POST', 
     url: servletUrl,
     data: datos,    
-    success: function(response) {         
-        var jsonData = JSON.parse(response);                  
-        $("#tipoDocumento-admin").val(jsonData[0].tipoDocumento);
-        $("#documento-admin").val(jsonData[0].documento);
-        $("#nombres-admin").val(jsonData[0].nombre);
-        $("#apellidos-admin").val(jsonData[0].apellido);
-        $("#email-admin").val(jsonData[0].email);
-        $("#direccion-admin").val(jsonData[0].direccion);
-        $("#telefono-admin").val(jsonData[0].telefono);
-        $("#wpp-admin").val(jsonData[0].whatsapp);
-        $("#rol-admin").val(jsonData[0].rol);
-        $("#password-admin").val(jsonData[0].password);
+    success: function(response) {           
+        var jsonData = JSON.parse(response);     
+        $("#tipoDocumento-admin").val(jsonData.tipoDocumento);
+        $("#documento-admin").val(jsonData.documento);
+        $("#nombres-admin").val(jsonData.nombres);
+        $("#apellidos-admin").val(jsonData.apellidos);
+        $("#email-admin").val(jsonData.email);
+        $("#direccion-admin").val(jsonData.direccion);
+        $("#telefono-admin").val(jsonData.telefono);
+        $("#wpp-admin").val(jsonData.whatsapp);
+        $("#rol-admin").val(jsonData.rol);
+        $("#password-admin").val(jsonData.pass);
         
     },
     error: function(xhr, status, error) { 
@@ -362,6 +342,7 @@ $(document).ready(function() {
          }); 
 
     });
+ 
 });  
 
 
